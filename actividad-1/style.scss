@@ -4,6 +4,7 @@ $primary: #cdd6f4;
 $dark: #1e1e2e;
 $light: #585b70;
 $surface: $light;
+$subtext: #a6adc8;
 
 @import "bootstrap-5.0.2/scss/bootstrap";
 
@@ -22,4 +23,9 @@ body {
 
 .border-surface {
     border-color: $red;
+}
+
+.date {
+    color: $subtext;
+    font-size: medium;
 }
