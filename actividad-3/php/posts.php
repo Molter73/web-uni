@@ -4,11 +4,17 @@ include("add_post.php");
 
 switch($_SERVER["REQUEST_METHOD"]) {
     case 'GET':
-        $count = isset($_GET["count"]) ? $_GET["count"] : 20;
-        $page = isset($_GET["page"]) ? $_GET["page"] : 0;
-        $offset = $page * $count;
-        echo get_posts($offset, $count);
+        $count = filter_input(INPUT_GET, "count", FILTER_VALIDATE_INT, [
+            "options" => [
+                "default" => 20
+        ]]);
+        $page = filter_input(INPUT_GET, "page", FILTER_VALIDATE_INT, [
+            "options" => [
+                "default" => 0
+        ]]);
+        echo get_posts($page, $count);
         break;
+
     case 'POST':
         $title = filter_input(INPUT_POST, "title");
         $link = filter_input(INPUT_POST, "link", FILTER_VALIDATE_URL);
@@ -17,6 +23,7 @@ switch($_SERVER["REQUEST_METHOD"]) {
         header("Location: ../index.html");
         echo add_post($title, $link, $description);
         break;
+
     default:
         die("Unsupported method: " . $_SERVER["REQUEST_METHOD"]);
 }

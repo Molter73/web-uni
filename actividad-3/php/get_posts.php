@@ -1,7 +1,9 @@
 <?php
 include_once("db.php");
 
-function get_posts($offset, $count) {
+function get_posts($page, $count) {
+    $offset = $page * $count;
+
     $conn = db_connect();
 
     $stmt = mysqli_prepare($conn, "SELECT * FROM posts ORDER BY date DESC LIMIT ?,?");
