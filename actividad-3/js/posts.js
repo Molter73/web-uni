@@ -3,6 +3,7 @@ var posts = $('#posts')
 var total_posts = 0
 const POSTS_PER_PAGE = 20
 const POSTS_URL = 'php/posts.php'
+var date_formatter = new Intl.DateTimeFormat('es-SP')
 
 function create_post(data) {
     var container = $('<div>')
@@ -11,7 +12,7 @@ function create_post(data) {
 
     var date = $('<span>')
     date.attr('class', 'date')
-    date.text(data.date)
+    date.text(date_formatter.format(new Date(data.date)))
     title.append(date)
 
     var description = $('<p>')
